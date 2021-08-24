@@ -11,9 +11,9 @@
 
     <a class="github" href="https://github.com/keryanS" title="Find my projects on GitHub"><svg class="icon icon--github"><use xlink:href="#icon-github"></use></svg></a>
 
-    <Dots></Dots>
+    <Dots v-bind:stage="stage" v-bind:tabs="tabs"></Dots>
 
-    <button class="hamburger">
+    <button class="hamburger" @click="toggleMenu">
       <div class="hamburger__line hamburger__line--01">
         <div class="hamburger__line-in hamburger__line-in--01"></div>
       </div>
@@ -49,11 +49,19 @@ export default {
   components: {
     Dots
   },
+  props: {
+    stage: String,
+    tabs: Array
+  },
   data: function(){
     return {
+      menuOpen: false
     }
   },
   methods: {
+    toggleMenu() {
+      this.menuOpen=!this.menuOpen
+    },
     menu() {
       const elmHamburger = document.querySelector('.hamburger');
       const gNavItems = document.querySelectorAll('.global-menu__item');
@@ -90,8 +98,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+
+  .shape-overlays:not(.is-opened) {
+    transform: rotate(180deg);
+  }
   .content--fixed {
-    position: sticky;
+    position: absolute;
     top: 0;
     left: 0;
     display: grid;
@@ -99,7 +111,7 @@ export default {
     width: 100%;
     max-width: none;
     min-height: 0;
-    height: 100vh;
+    height: 100%;
     padding: 1.5em;
     z-index: 100;
     pointer-events: none;
@@ -163,6 +175,7 @@ export default {
     grid-area: github;
     justify-self: start;
     margin: 0.5em;
+    color: var(--color-link);
   }
 
 </style>

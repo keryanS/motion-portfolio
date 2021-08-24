@@ -1,6 +1,6 @@
 
-<template v-show="stage=='introduction'">
-  <div class="stage-1 content" id="introduction">
+<template v-show="stage=='experience'">
+  <div class="stage-2 content" id="experience">
 
 
     <div class="text__block title">Salut</div>
@@ -20,7 +20,7 @@
 import {gsap} from 'gsap';
 
 export default {
-  name: 'Introduction',
+  name: 'Experience',
   data: function(){
     return {
     }
@@ -60,7 +60,4 @@ tl.play();
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 
-.text__block{
-
-}
 </style>

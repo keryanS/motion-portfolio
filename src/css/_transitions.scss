@@ -2,20 +2,9 @@
 
 /* Color schemes */
 
-
-
-
-a {
-	text-decoration: none;
-	color: #5d93d8;
-	color: var(--color-link);
-	outline: none;
-}
-
-a:hover,
+a, a:hover,
 a:focus {
-	color: #423c2b;
-	color: var(--color-link-hover);
+	text-decoration: none;
 	outline: none;
 }
 
@@ -45,11 +34,7 @@ a:focus {
 
 
 
-
-
 /* Top Navigation Style */
-
-
 
 
 .shape-overlays {

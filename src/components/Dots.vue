@@ -1,17 +1,17 @@
 <template>
   <nav class="dots">
     <svg class="icon icon--keyboard"><use xlink:href="#icon-keyboard"></use></svg>
-    <a class="dot current" href="#"><span>Introduction</span></a>
-    <a class="dot" href="#"><span>Expériences</span></a>
-    <a class="dot" href="#"><span>Compétences</span></a>
-    <a class="dot" href="#"><span>Réalisations</span></a>
-    <a class="dot" href="#"><span>Contact</span></a>
+    <a v-for="tab in tabs" :key="tab" :class="['dot', {current: stage===tab}]" href="#"><span>{{tab}}</span></a>
   </nav>
 </template>
 
 <script>
 export default {
   name: 'Dots',
+  props: {
+    stage: String,
+    tabs: Array
+  }
 }
 </script>
 
@@ -30,6 +30,7 @@ export default {
     margin: 0 0.15em;
     display: none;
     overflow: hidden;
+    color: var(--color-link);
     &:hover,
     &:focus {
       opacity: 0.5;
@@ -67,23 +68,23 @@ export default {
       height: 17px;
       margin: 0 4px;
       border-radius: 50%;
-      background: var(--color-link);
-
+      background-color: var(--color-link);
+      transition: background-color 0.2s;
 
       &.current {
-        background: var(--color-link-hover);
+        background-color: var(--color-link-hover);
         span {
-          display: block;
-
+          opacity: 1;
         }
       }
       span {
         position: absolute;
+        display: block;
         line-height: 1;
         right: 100%;
-        display: none;
         margin: 0 1em 0 0;
-
+        opacity: 0;
+        transition: opacity 0.2s;
       }
     }
   }
