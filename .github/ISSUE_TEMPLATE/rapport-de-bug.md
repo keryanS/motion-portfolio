@@ -1,5 +1,5 @@
 ---
-name: Rapport de bug
+name: Bbug
 about: Rapporter un bug pour améliorer le DSFR
 title: ''
 labels: bug
