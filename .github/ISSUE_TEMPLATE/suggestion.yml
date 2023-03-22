@@ -1,12 +1,11 @@
 ---
-name: Suggestion
-about: Suggérer une nouvelle idée au Système de Design de l'État.
-title: ''
+name: 'Suggestion'
+description: 'Suggérer une nouvelle idée au Système de Design de l'État.'
 labels: 'type: suggestion'
-assignees: ''
-
----
-
+body:
+- type: markdown
+  attributes:
+    value: |
 **Si votre suggestion concerne un composant existant, merci de décrire le problème rencontré de façon claire et concise**
 Exemple : sur le composant [...], je ne peux pas [...].
 
