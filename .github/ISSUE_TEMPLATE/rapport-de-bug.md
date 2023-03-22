@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 ### Décrire le bug
-Une description claire et précise du bug.
+Une description claire et précise du bug. 
 
 ### Les étapes pour reproduire le bug
 Exemple :
