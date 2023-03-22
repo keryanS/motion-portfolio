@@ -2,6 +2,9 @@ name: "Suggestion"
 description: "Suggérer une nouvelle idée au Système de Design de l'État."
 labels: "type: suggestion"
 body:
+- type: textarea
+  attributes:
+    label: "What's wrong?"
 - type: markdown
   attributes:
     value: |
