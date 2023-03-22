@@ -1,8 +1,9 @@
-
 ---
 name: Suggestion
 about: Suggérer une nouvelle idée au Système de Design de l'État.
-labels: type: suggestion
+title: ''
+labels: suggestion
+assignees: ''
 
 ---
 
