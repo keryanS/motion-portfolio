@@ -1,6 +1,6 @@
-name: 'Suggestion'
-description: 'Suggérer une nouvelle idée au Système de Design de l'État.'
-labels: 'type: suggestion'
+name: "Suggestion"
+description: "Suggérer une nouvelle idée au Système de Design de l'État."
+labels: "type: suggestion"
 body:
 - type: markdown
   attributes:
