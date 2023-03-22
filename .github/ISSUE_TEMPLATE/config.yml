@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Une question ?
+    url: https://gouvfr.atlassian.net/servicedesk/customer/portals
+    about: Centre de support du Design System de l'État.
