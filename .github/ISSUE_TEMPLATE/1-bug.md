@@ -1,5 +1,5 @@
 ---
-name: Bbug
+name: Bug
 about: Rapporter un bug pour améliorer le DSFR
 title: ''
 labels: bug
@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 ### Décrire le bug
-Une description claire et précise du bug. 
+Une description claire et précise du bug.
 
 ### Les étapes pour reproduire le bug
 Exemple :
