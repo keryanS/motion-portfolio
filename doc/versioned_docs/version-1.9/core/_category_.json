@@ -1,0 +1,8 @@
+{
+  "label": "Fondamentaux",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Les éléments de base sur lesquels est construit le DSFR."
+  }
+}
