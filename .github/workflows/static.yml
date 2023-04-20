@@ -1,5 +1,9 @@
 name: Docusaurus deployment
 
+defaults:
+  run:
+    working-directory: ./website
+    
 on:
   push:
     branches:
