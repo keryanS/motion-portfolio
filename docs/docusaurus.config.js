@@ -17,7 +17,7 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/dsfr/',
 
-  // GitHub pages deployment config.
+  // GitHub pages  deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'keryanS', // Usually your GitHub org/user name.
   projectName: 'motion-portfolio', // Usually your repo name.
