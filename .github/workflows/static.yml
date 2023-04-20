@@ -1,9 +1,9 @@
-name: Docusaurus deployment
-
 defaults:
   run:
-    working-directory: ./docs
+    working-directory: docs/
     
+name: Docusaurus deployment
+
 on:
   push:
     branches:
