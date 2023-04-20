@@ -6,7 +6,9 @@ on:
       - main
     # Review gh actions docs if you want to further define triggers, paths, etc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
-
+defaults:
+      run:
+        working-directory: ./docs
 jobs:
   docusaurus-deploy:
     name: Docusaurus deployment
@@ -23,8 +25,10 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+        working-directory: ./docs
       - name: Test build website
         run: yarn build
+        working-directory: ./docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
