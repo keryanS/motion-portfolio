@@ -2,7 +2,7 @@ name: Docusaurus deployment
 
 defaults:
   run:
-    working-directory: ./website
+    working-directory: ./docs
     
 on:
   push:
