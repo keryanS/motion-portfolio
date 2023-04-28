@@ -42,33 +42,35 @@ Analytics est un package à part, il n’est pas compris dans le fichier js glob
 Le package dispose tout de même d’une dépendance au DSFR, notamment au core.
 Une version standalone des analytics permet d’utiliser ce package en dehors de toutes dépendances au DSFR.
 
-## Configuration
+## Configuration {#Configuration}
 
 Il est nécessaire de configurer le package Analytics au sein de [la configuration de l’API
 DSFR](https://www.systeme-de-design.gouv.fr/comment-utiliser-le-dsfr/developpeurs/api-javascript)
 
 La configuration doit être placée **avant** les fichiers `patch.module.js`, `dsfr.module.js` et `analytics.module.js`.
 
-    <script>
-        window.dsfr = {
-            verbose: true,
-            analytics: {
-                domain: ' mon.domainedetracking.com',
-                // collection: 'manual',
-                // enableRating: true,
-                page: {
-                    template: 'article'
-                },
-                user: {
-                    // ...
-                },
-                site: {
-                    production: 'false',
-                    entity: 'Ministère des armées', // Entity responsible for website
-                }
+```javascript
+<script>
+    window.dsfr = {
+        verbose: true,
+        analytics: {
+            domain: ' mon.domainedetracking.com',
+            // collection: 'manual',
+            // enableRating: true,
+            page: {
+                template: 'article'
+            },
+            user: {
+                // ...
+            },
+            site: {
+                production: 'false',
+                entity: 'Ministère des armées', // Entity responsible for website
             }
-        };
-    </script>
+        }
+    };
+</script>
+```
 
 Utiliser le DSFR mode verbose permet d’afficher dans la console le résultat de la fonction collect(), montrant les
 informations envoyées à Eulérian.
@@ -79,17 +81,19 @@ L’instance d’Analytics est accessible depuis `window.dsfr.analytics`
 
 ### CONFIGURATION
 
-    <script>
-        window.dsfr = {
-            analytics: {
-                domain: 'mon.domainedetracking.com',
-                // collection: 'manual',
-                // enableRating: true
-            }
-        };
-    </script>
+```javascript
+<script>
+    window.dsfr = {
+        analytics: {
+            domain: 'mon.domainedetracking.com',
+            // collection: 'manual',
+            // enableRating: true
+        }
+    };
+</script>    
+```
 
-##### domain :
+##### domain
 
 _String_ (required)
 
@@ -97,7 +101,7 @@ Il est requis de définir la propriété `domain` avec le [domaine récupéré a
 
 * * *
 
-##### ~~mode~~ collection :
+##### ~~mode~~ collection
 
 _String_
 
@@ -114,7 +118,7 @@ application” (par défaut si dsfr en mode ‘vue’, ‘react’ ou ‘angular
 
 * * *
 
-##### enableRating :
+##### enableRating
 
 _Boolean_
 
@@ -124,7 +128,7 @@ Permet d’activer le taux de click. (défaut: false)
 
 ### PROPRIÉTÉS
 
-##### page :
+##### page
 
 _Page_
 
@@ -134,7 +138,7 @@ Getter qui retourne l’instance de [Page](https://gouvfr.atlassian.net/wiki/spa
 
 * * *
 
-##### site :
+##### site
 
 _Site_
 
@@ -144,7 +148,7 @@ Getter qui retourne l’instance de [Site](https://gouvfr.atlassian.net/wiki/spa
 
 * * *
 
-##### user :
+##### user
 
 _User_
 
@@ -154,7 +158,7 @@ Getter qui retourne l’instance de [User](https://gouvfr.atlassian.net/wiki/spa
 
 * * *
 
-##### cmp :
+##### cmp
 
 _ConsentManagerPlatform_
 
@@ -164,7 +168,7 @@ Getter qui retourne l’instance de [ConsentManagerPlatform](https://gouvfr.atla
 
 * * *
 
-##### isReady :
+##### isReady
 
 _Boolean_
 
@@ -174,7 +178,7 @@ Getter qui retourne l'état du package
 
 * * *
 
-##### readiness :
+##### readiness
 
 _Promise_
 
@@ -186,7 +190,7 @@ Getter qui retourne une Promise permettant de se synchroniser sur le package
 
 * * *
 
-##### isDebugging :
+##### isDebugging
 
 _Boolean_
 
@@ -200,7 +204,7 @@ Permet d’activer / désactiver le debug Eulerian.
 
 ### MÉTHODES
 
-##### push (type, layer) :
+##### push (type, layer)
 
 `window.dsfr.analytics.push(type, layer)`
 
@@ -208,7 +212,7 @@ Alias de la fonction EA\_push d’Eulerian via le package. (voir doc Eulerian [h
 
 * * *
 
-##### reset (clear = false) :
+##### reset (clear = false)
 
 `window.dsfr.analytics.reset(clear)`
 
@@ -218,7 +222,7 @@ Si le paramètre `clear = true` => toutes les données sont remises en état ind
 
 * * *
 
-###### collect : {#collect}
+###### collect {#collect}
 
 `window.dsfr.analytics.collect()`
 
@@ -230,18 +234,16 @@ Envoie au collector le datalayer constitué par l’ensemble des données consol
 
 * User
 
-
 * * *
 
 ### USAGE
 
-:::note 
-
+:::note
 Le package Analytics repose sur 2 principes de fonctionnement pour traquer les pages :
-* Par le biais de la configuration, il est possible de définir toutes les données qui seront envoyées au chargement de la page (via le mode automatique)
-* Par le biais de l’API, on peut définir toutes les données propriété par propriété pour ensuite envoyer l’ensemble
-grâce à la méthode **collect**
+    * Par le biais de la configuration, il est possible de définir toutes les données qui seront envoyées au chargement de la page (via le mode automatique)
 
+    * Par le biais de l’API, on peut définir toutes les données propriété par propriété pour ensuite envoyer l’ensemble
+    grâce à la méthode **collect**
 :::
 
 ```javascript
@@ -293,10 +295,11 @@ window.dsfr.analytics.page
 ```
 
 ### PROPRIÉTÉS
-
+:::note
 Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à Eulerian.
+:::
 
-##### path :
+##### path
 
 _String_ (EA: path)
 
@@ -306,10 +309,9 @@ _String_ (EA: path)
 
 * Utilise `document.location.pathname` si non défini.
 
-
 * * *
 
-##### referrer :
+##### referrer
 
 _String_ (EA: referrer)
 
@@ -317,10 +319,9 @@ _String_ (EA: referrer)
 
 * Défini la page précédente si différente de `document.referer` (si page virtuelle)
 
-
 * * *
 
-##### title :
+##### title
 
 _String_ (EA: page\_title)
 
@@ -328,10 +329,9 @@ _String_ (EA: page\_title)
 
 * Défini le titre de page si différent de la balise `title` de la page (si page virtuelle)
 
-
 * * *
 
-##### name :
+##### name
 
 _String_ (EA: page\_name)
 
@@ -339,10 +339,9 @@ _String_ (EA: page\_name)
 
 * Défini un nom de page (égal à title par défaut)
 
-
 * * *
 
-##### labels :
+##### labels
 
 _Array`<String>`_ (EA: pagelabel)
 
@@ -350,10 +349,9 @@ _Array`<String>`_ (EA: pagelabel)
 
 * Liste de 5 regroupements de contenus maximum
 
-
 * * *
 
-##### categories :
+##### categories
 
 _Array`<String>`_ (EA: page\_category1, page\_category2, page\_category1)
 
@@ -364,10 +362,9 @@ _Array`<String>`_ (EA: page\_category1, page\_category2, page\_category1)
 * Les 3 premiers labels servent à renseigner (EA: page\_category1), (EA: page\_category2), et (EA:
 page\_category3)
 
-
 * * *
 
-##### template :
+##### template
 
 _String_ (EA: template)
 
@@ -375,10 +372,9 @@ _String_ (EA: template)
 
 * Permet de définir un nom de template
 
-
 * * *
 
-##### group :
+##### group
 
 _String_ (EA: pagegroup)
 
@@ -386,10 +382,9 @@ _String_ (EA: pagegroup)
 
 * Permet de définir un nom de groupe (par défaut égal à template)
 
-
 * * *
 
-##### segment :
+##### segment
 
 _String_ (EA: segment-site)
 
@@ -397,10 +392,9 @@ _String_ (EA: segment-site)
 
 * Permet de définir un nom de segment (par défaut égal à template)
 
-
 * * *
 
-##### subtemplate :
+##### subtemplate
 
 _String_ (EA: page\_subtemplate)
 
@@ -412,7 +406,7 @@ des thèmes différents
 
 * * *
 
-##### theme :
+##### theme
 
 _String_ (EA: page\_theme)
 
@@ -420,10 +414,9 @@ _String_ (EA: page\_theme)
 
 * Permet de définir le thème principal des contenus
 
-
 * * *
 
-##### subtheme :
+##### subtheme
 
 _String_ (EA: page\_subtheme)
 
@@ -431,10 +424,9 @@ _String_ (EA: page\_subtheme)
 
 * Permet de définir un sous-theme
 
-
 * * *
 
-##### related :
+##### related
 
 _String_ (EA: page\_related)
 
@@ -442,10 +434,9 @@ _String_ (EA: page\_related)
 
 * Clé unique passée sur l'ensemble des pages avec des contenus liés
 
-
 * * *
 
-##### depth :
+##### depth
 
 _Integer_ (EA: page\_depth)
 
@@ -455,7 +446,7 @@ Niveau de profondeur de la page (default: 0)
 
 * * *
 
-##### isError :
+##### isError
 
 _Boolean_ (EA: error) \- default: false (required)
 
@@ -463,10 +454,9 @@ _Boolean_ (EA: error) \- default: false (required)
 
 * Défini si la page est une page d’erreur (**obligatoire** si page d’erreur)
 
-
 * * *
 
-##### current :
+##### current
 
 _Integer_ (EA: page\_pagination)
 
@@ -476,10 +466,9 @@ Numéro de page si au sein d’un découpage ou d’une pagination
 
 * Récupération automatique depuis le composant Pagination (Implémentation à venir)
 
-
 * * *
 
-##### total :
+##### total
 
 _Integer_
 
@@ -491,7 +480,7 @@ Vient compléter la valeur envoyée à (EA: page\_pagination) si renseignée (va
 
 * * *
 
-##### filters :
+##### filters
 
 * _Array`<String>`_ (EA: page\_filters)
 
@@ -503,7 +492,7 @@ Défini les filtres appliqués à la page
 
 ### MÉTHODES
 
-##### reset (clear = false) :
+##### reset (clear = false)
 
 `window.dsfr.analytics.page.reset(clear)`
 
@@ -521,29 +510,32 @@ window.dsfr.analytics.user
 
 ### CONFIGURATION
 
-    <script>
-        window.dsfr = {
-            analytics: {
-                user: {
-                    connect: {
-                        uid: '2446565', // user id - required when connected
-                        email: 'rg6fgfdRfg445465dfFb', // encoded user email - required when connected
-                        isNew: true, // user just registered
-                    },
-                    profile: 'visitor', // user profile
-                    language: 'fr',
-                    type: 'pro'
+```javascript
+<script>
+    window.dsfr = {
+        analytics: {
+            user: {
+                connect: {
+                    uid: '2446565', // user id - required when connected
+                    email: 'rg6fgfdRfg445465dfFb', // encoded user email - required when connected
+                    isNew: true, // user just registered
                 },
-            }
-        };
-    </script>
+                profile: 'visitor', // user profile
+                language: 'fr',
+                type: 'pro'
+            },
+        }
+    };
+</script>
+```
 
 ### PROPRIÉTÉS
 
-Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à
-Eulerian.
+:::note
+Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à Eulerian.
+:::
 
-##### uid :
+##### uid
 
 _String_ (EA: uid)
 
@@ -555,7 +547,7 @@ Voir la méthode [connect](#connect)
 
 * * *
 
-##### email :
+##### email
 
 _String_ (EA: email)
 
@@ -567,7 +559,7 @@ Voir la méthode [connect](#connect)
 
 * * *
 
-##### isNew :
+##### isNew
 
 _Boolean_ (EA: newcustomer)
 
@@ -579,7 +571,7 @@ Voir la méthode [connect](#connect)
 
 * * *
 
-##### status :
+##### status
 
 _String_ (EA: user\_login\_status)
 
@@ -591,14 +583,13 @@ propriété définissant l'état de l’utilisateur entre ces différents status
 
 * `connected` (connecté)
 
-
 Les différentes valeurs sont énumérées dans l’objet `window.dsfr.analytics.user.constructor.Status`
 
 Voir la méthode [connect](#connect)
 
 * * *
 
-##### profile :
+##### profile
 
 _String_ (EA: profile)
 
@@ -608,7 +599,7 @@ Défini la catégorie de profil de l’utilisateur. (En cours de définition)
 
 * * *
 
-##### language :
+##### language
 
 _String_ (EA: user\_language)
 
@@ -620,7 +611,7 @@ par défaut, langage du navigateur
 
 * * *
 
-##### type :
+##### type
 
 _String_ (EA: user\_type)
 
@@ -632,14 +623,13 @@ Défini le type d’utilisateur parmi les valeurs suivantes :
 
 * `individual` (part)
 
-
 Les différentes valeurs sont énumérées dans l’objet `window.dsfr.analytics.user.constructor.Type`
 
 * * *
 
 ### MÉTHODES
 
-##### reset (clear = false) :
+##### reset (clear = false)
 
 `window.dsfr.analytics.user.reset(clear)`
 
@@ -649,7 +639,7 @@ Si le paramètre `clear = true` => toutes les données sont remises en état ind
 
 * * *
 
-##### connect (uid, email, isNew = false) :
+##### connect (uid, email, isNew = false)
 
 `window.dsfr.analytics.page.connect(uid, email, isNew)`
 
@@ -687,27 +677,31 @@ window.dsfr.analytics.site
 
 ### CONFIGURATION
 
-    <script>
-        window.dsfr = {
-            analytics: {
-                site: {
-                    environment: 'production', // by default development \['development', 'stage', 'production'\]
-                    entity: 'Ministère des armées', // Entity responsible for website
-                    language: '', // language of the website (ISO 639-1). default to html lang
-                    target: 'target', // site target
-                    type: 'type', // site type
-                    region: 'FR-IDF', // region of the website (ISO 3166-2:FR)
-                    department: 'FR-75', // department of the website (ISO 3166-2:FR)
-                },
-            }
-        };
-    </script>
+```javascript
+<script>
+    window.dsfr = {
+        analytics: {
+            site: {
+                environment: 'production', // by default development \['development', 'stage', 'production'\]
+                entity: 'Ministère des armées', // Entity responsible for website
+                language: '', // language of the website (ISO 639-1). default to html lang
+                target: 'target', // site target
+                type: 'type', // site type
+                region: 'FR-IDF', // region of the website (ISO 3166-2:FR)
+                department: 'FR-75', // department of the website (ISO 3166-2:FR)
+            },
+        }
+    };
+</script>
+```
 
 ### PROPRIÉTÉS
 
->Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à Eulerian.
+:::note
+Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à Eulerian.
+:::
 
-**environment :
+##### environment
 
 _String_ (EA: site\_environment)
 
@@ -721,12 +715,11 @@ Défini l’environnement du site parmi :
 
 * `stage`
 
-
 Les différentes valeurs sont énumérées dans l’objet `window.dsfr.analytics.site.constructor.Environment`
 
 * * *
 
-##### entity :
+##### entity
 
 _String_ (EA: site\_entity) (required)
 
@@ -736,7 +729,7 @@ Défini l'entité responsable du site **(obligatoire)**
 
 * * *
 
-##### language :
+##### language
 
 _String_ (EA: site\_language)
 
@@ -748,7 +741,7 @@ Par défaut, reprend l’attribut lang sur la balise `<html>` de la page
 
 * * *
 
-##### target :
+##### target
 
 _String_ (EA: site\_target)
 
@@ -758,7 +751,7 @@ Défini l'objectif du site
 
 * * *
 
-##### type :
+##### type
 
 _String_ (EA: site\_type)
 
@@ -768,7 +761,7 @@ Défini le type de site
 
 * * *
 
-##### region :
+##### region
 
 _String_ (EA: site\_region)
 
@@ -778,7 +771,7 @@ Défini la région du site en ISO 3166-2:FR (pour les sites régionaux)
 
 * * *
 
-##### department :
+##### department
 
 _String_ (EA: site\_department)
 
@@ -790,7 +783,7 @@ Défini le département du site (pour les sites départementaux)
 
 ### MÉTHODES
 
-##### reset (clear = false) :
+##### reset (clear = false)
 
 `window.dsfr.analytics.site.reset(clear)`
 
@@ -802,37 +795,43 @@ Si le paramètre `clear = true` => toutes les données sont remises en état ind
 
 ## class Search
 
-L’instance de Search est accessible depuis
+L’instance de Search est accessible depuis :
 
-window.dsfr.analytics.search
+`window.dsfr.analytics.search`
 
 ### CONFIGURATION
 
-    <script>
-        window.dsfr = {
-            analytics: {
-                search: {
-                    engine: 'principal',
-                    results: 486,
-                    terms: 'télécharger le cerfa 1234',
-                    category: 'categorie',
-                    theme: 'theme',
-                    type: 'type',
-                    method: ''
-                },
-            }
-        };
-    </script>
+```javascript
+<script>
+    window.dsfr = {
+        analytics: {
+            search: {
+                engine: 'principal',
+                results: 486,
+                terms: 'télécharger le cerfa 1234',
+                category: 'categorie',
+                theme: 'theme',
+                type: 'type',
+                method: ''
+            },
+        }
+    };
+</script>
+```
 
 ### PROPRIÉTÉS
 
-Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à
-Eulerian.
+:::note
+Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à Eulerian.
+:::
 
-[paramètre supplémentaire]
-indique qu’il s’agit d’un paramètre supplémentaire du moteur de recherche. L'ajout de cette nouvelle variable nécessite l'implémentation d'un couple de paramètres isearchkey et isearchdata, isearchkey contenant le nom du paramètre et isearchdata la valeur. On retrouve en sortie dans le datalayer 4 valeurs ['isearchkey', ‘PARAMETER\_NAME', ‘isearchdata’, 'PARAMETER\_VALUE’\]
+:::note
+[paramètre supplémentaire] indique qu’il s’agit d’un paramètre supplémentaire du moteur de recherche.
+L'ajout de cette nouvelle variable nécessite l'implémentation d'un couple de paramètres isearchkey et isearchdata, isearchkey contenant le nom du paramètre et isearchdata la valeur.
+On retrouve en sortie dans le datalayer 4 valeurs ['isearchkey', ‘PARAMETER\_NAME', ‘isearchdata’, 'PARAMETER\_VALUE’\]
+:::
 
-##### engine :
+##### engine
 
 _String_ (EA: isearchengine)
 
@@ -842,7 +841,7 @@ Nom du moteur de recherche configuré dans Eulerian.
 
 * * *
 
-##### results :
+##### results
 
 _Int_ (EA: isearchresults)
 
@@ -852,10 +851,9 @@ Nombre de résultats sur une page de résultat suite à une recherche dans la ba
 
 * * *
 
-##### terms :
+##### terms
 
-_String_ (EA: isearchkey, search\_terms, isearchdata)
-[paramètre supplémentaire]
+_String_ (EA: isearchkey, search\_terms, isearchdata) [paramètre supplémentaire]
 
 `window.dsfr.analytics.search.terms`
 
@@ -863,10 +861,9 @@ Termes de la recherche.
 
 * * *
 
-##### category :
+##### category
 
-_String_ (EA: isearchkey, search\_category, isearchdata)
-[paramètre supplémentaire]
+_String_ (EA: isearchkey, search\_category, isearchdata) [paramètre supplémentaire]
 
 `window.dsfr.analytics.search.category`
 
@@ -874,10 +871,9 @@ Catégorie de la recherche (lorsqu’un sélecteur de catégorie est disponible)
 
 * * *
 
-##### theme :
+##### theme
 
-_String_ (EA: isearchkey, search\_theme, isearchdata)
-[paramètre supplémentaire]
+_String_ (EA: isearchkey, search\_theme, isearchdata) [paramètre supplémentaire]
 
 `window.dsfr.analytics.search.theme`
 
@@ -885,23 +881,19 @@ Thème de la recherche (lorsqu’un sélecteur de thème est disponible).
 
 * * *
 
-##### type :
+##### type
 
-_String_ (EA: isearchkey, search\_type, isearchdata)
-[paramètre supplémentaire]
+_String_ (EA: isearchkey, search\_type, isearchdata) [paramètre supplémentaire]
 
 `window.dsfr.analytics.search.type`
 
-Type de recherche si le moteur de recherche permet d’appliquer un type particulier (ex: uniquement
-documents,
-uniquement les 30 derniers jours)
+Type de recherche si le moteur de recherche permet d’appliquer un type particulier (ex: uniquement documents, uniquement les 30 derniers jours)
 
 * * *
 
-##### method :
+##### method
 
-_String_ (EA: isearchkey, search\_method, isearchdata)
-[paramètre supplémentaire]
+_String_ (EA: isearchkey, search\_method, isearchdata) [paramètre supplémentaire]
 
 `window.dsfr.analytics.search.method`
 
@@ -911,12 +903,11 @@ Défini la méthode de recherche utilisée, un envoi standard ou au clic sur une
 
 * _autocomplete_
 
-
 * * *
 
 ### MÉTHODES
 
-##### reset (clear = false) :
+##### reset (clear = false)
 
 `window.dsfr.analytics.search.reset(clear)`
 
@@ -930,33 +921,36 @@ Si le paramètre `clear = true` => toutes les données sont remises en état ind
 
 L’instance de Funnel est accessible depuis
 
-window.dsfr.analytics.funnel
+`window.dsfr.analytics.funnel`
 
 ### CONFIGURATION
 
-    <script>
-        window.dsfr = {
-            analytics: {
-                funnel: {
-                    id: 'id',
-                    type: 'type',
-                    name: 'name',
-                    step: 'step', // step name
-                    current: 2, // step number
-                    total: 7, // total number of steps
-                    objective: 'objective', // form objective
-                    error: 'email' // form's error type
-                }
+```javascript
+<script>
+    window.dsfr = {
+        analytics: {
+            funnel: {
+                id: 'id',
+                type: 'type',
+                name: 'name',
+                step: 'step', // step name
+                current: 2, // step number
+                total: 7, // total number of steps
+                objective: 'objective', // form objective
+                error: 'email' // form's error type
             }
-        };
-    </script>
+        }
+    };
+</script>
+```
 
 ### PROPRIÉTÉS
 
-Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à
-Eulerian.
+:::note
+Les noms entre parenthèses (EA: …) correspondent au nom des variables restituées dans le datalayer et envoyées à Eulerian.
+:::
 
-##### id :
+##### id
 
 _String_ (EA: funnel\_id)
 
@@ -966,7 +960,7 @@ Identifiant du parcours / formulaire multi-étape
 
 * * *
 
-##### type :
+##### type
 
 _String_ (EA: funnel\_type)
 
@@ -976,7 +970,7 @@ Type de parcours / formulaire
 
 * * *
 
-##### name :
+##### name
 
 _String_ (EA: funnel\_name)
 
@@ -986,7 +980,7 @@ Nom du parcours/formulaire si besoin de précision.
 
 * * *
 
-##### step :
+##### step
 
 _String_ (EA: funnel\_step\_name)
 
@@ -996,7 +990,7 @@ Nom de l'étape du parcours/formulaire.
 
 * * *
 
-##### current :
+##### current
 
 _Int_ (EA: funnel\_step\_number)
 
@@ -1006,7 +1000,7 @@ Numéro de l'étape en cours dans le parcours/formulaire.
 
 * * *
 
-##### total :
+##### total
 
 _Int_ (EA: funnel\_step\_max)
 
@@ -1016,7 +1010,7 @@ Nombre d’étapes maximum dans le parcours/formulaire.
 
 * * *
 
-##### objective :
+##### objective
 
 _String_ (EA: funnel\_objective)
 
@@ -1026,7 +1020,7 @@ Objectif du parcours/formulaire.
 
 * * *
 
-##### error :
+##### error
 
 _String_ (EA: funnel\_error)
 
@@ -1038,7 +1032,7 @@ Type d’erreur d’un parcours/formulaire.
 
 ### MÉTHODES
 
-##### reset (clear = false) :
+##### reset (clear = false)
 
 `window.dsfr.analytics.funnel.reset(clear)`
 
@@ -1056,32 +1050,91 @@ window.dsfr.analytics.cmp
 
 ### CONFIGURATION
 
-    <script>
-        window.dsfr = {
-            analytics: {
-                cmp: {
-                id: 'tarteaucitron'
-                },
-            }
-        };
-    </script>
+```javascript
+<script>
+    window.dsfr = {
+        analytics: {
+            cmp: {
+            id: 'tarteaucitron'
+            },
+        }
+    };
+</script>
+```
 
-la configuration d’une cmp permet d’automatiser son lancement
+la configuration d’une CMP permet d’automatiser son lancement
 
 ### MÉTHODES
 
-##### integrateTarteAuCitron () :
+##### integrateTarteAuCitron ()
 
 `window.dsfr.analytics.cmp.integrateTarteAuCitron()`
 
 Permet d’intégrer tarteaucitron
 
-équivalent de la première étape décrite [dans la documentation
-Eulerian](https://eulerian.wiki/doku.php?id=fr:quickonboarding:installation:cmp#tarteaucitron)
+équivalent de la première étape décrite [dans la documentation Eulerian](https://eulerian.wiki/doku.php?id=fr:quickonboarding:installation:cmp#tarteaucitron)
 
 * * *
 
-## Actions hors composant {#custom-action}
+## Actions
+
+Les actions correspondent aux impressions, aux évènements, ou aux interaction que l’on souhaite traquer. Le suivi de conversion couvre les besoins suivants :
+
+* Suivi d'action immédiate comme un clic sur un bouton, un téléchargement de fichier, …
+
+* Suivi d'action avec une entrée (début=in) et une sortie (validation=out).
+
+* Captation de paramètres associés à cette action comme des textes renseignés ou des cases cochées.
+
+* Possibilité de gérer des séquences de conversion - création d'un funnel étape par étape.
+
+#### ActionName
+
+Lorsqu’une action est émise, un actionName est envoyé à Eulérian.
+Ce nom d’action est constitué du type d’action, de l’intitulé de l'élément à remonté, de sa hiérarchie, et de son id.
+
+:::note
+⚠️ **Un id est obligatoire sur tous les éléments traqués** (retrouvez les éléments du dsfr nécéssitant un id dans la colonne “element” du [tableau](#dsfr-actions) dessous).
+
+Il est nécessaire que l’id soit :
+
+* unique : L’id doit être unique au site, ex:
+
+* Deux boutons différents ne doivent pas avoir le même id, même sur des pages différentes
+
+* Le header peut avoir le même id sur toute les pages s’il est identique
+
+* pérenne : L’id doit être le même pour tous les utilisateurs et figé dans le temps.
+
+:::
+
+exemple d’actionName : `(click)_titre_niveau_2_›_titre_niveau_3_›_label_de_l_element_[button-id-1]`
+
+:::tip
+Les espaces sont remplacé par des `_` [_ | low line (U+005F) @ Graphemica](https://graphemica.com/_)
+Les niveaux de hiérarchie sont séparé par des `›` [› | single right-pointing angle quotation mark (U+203A) @ Graphemica](https://graphemica.com/%E2%80%BA)
+
+Les caractères suivants `"'<>*$&~`|\?^~` étant restreints par Eulerian, ils sont remplacés par une équivalence en caractère fullwidth : [Graphemica | Halfwidth and Fullwidth Forms](https://graphemica.com/blocks/halfwidth-and-fullwidth-forms)
+
+:::
+
+#### Taux de click
+
+L’API analytics utilise des actions pour suivre les interactions de l’utilisateurs dans et en dehors des composants.
+
+Cette fonctionnalité peut permettre de connaître le taux d’interaction d’un élément, à savoir le rapport entre le nombre de fois où il a été affiché et le nombre de fois où une interaction a eu lieu.
+
+L’activation de cette fonctionnalité se fait d’abord dans le fichier de [configuration](#configuration) par la propriété `enableRating`
+
+Après avoir été activée, elle sera automatiquement en place sur les composants qui supportent la fonctionnalité (voir dernière colonne dans le [tableau](#dsfr-actions)).
+
+:::note
+
+Cette fonctionnalité peut entraîner un envoi de donnée très important, puisque chaque composant permettant de suivre le taux de click enverra la donnée d’affichage. Il est important de s’assurer de la pertinence de cette fonctionnalité.
+
+:::
+
+### Actions d’interaction hors composant {#custom-action}
 
 Il est possible de remonter à Eulérian des actions effectuées sur des éléments HTML hors composants du DSFR.
 
@@ -1089,9 +1142,28 @@ Pour ajouter un écouteur d'événement il suffit d’ajouter un attribut `data-
 balise
 HTML concernée.
 
-Il existe les actions suivantes :
+#### Exemples d’ajout d’une action
 
-##### click :
+```html
+<p>Envoyez un événement lors du clic sur
+<span data-fr-analytics-click="label à remonter">ce texte</span>.
+</p>
+```
+
+```html
+<p>
+Envoyez un événement lors du clic sur
+<a href="http://url-externe" data-fr-analytics-click>ce lien externe</span>.
+</p>
+```
+
+#### ActionType
+
+Les différents types d’action sont définis dans : src/analytics/script/analytics/action/type.js
+
+Il existe les types d'actions suivants :
+
+##### click
 
 `data-fr-analytics-click`
 
@@ -1104,7 +1176,7 @@ en fonction des attributs de l'élément (href, download)
 
 * * *
 
-##### internal :
+##### internal
 
 `data-fr-analytics-internal`
 
@@ -1115,7 +1187,7 @@ Clique vers un lien interne, une ancre.
 
 * * *
 
-##### external :
+##### external
 
 `data-fr-analytics-external`
 
@@ -1126,7 +1198,7 @@ Clique vers un lien externe.
 
 * * *
 
-##### download :
+##### download
 
 `data-fr-analytics-download`
 
@@ -1137,7 +1209,7 @@ Clique sur un lien téléchargeable.
 
 * * *
 
-##### double-click :
+##### double-click
 
 `data-fr-analytics-dblclick`
 
@@ -1147,7 +1219,7 @@ Interaction générique du double-clic.
 
 * * *
 
-##### change :
+##### change
 
 `data-fr-analytics-change`
 
@@ -1157,580 +1229,74 @@ Mode : [out] | type : _event_
 
 * * *
 
-### Exemples d’ajout d’une action
-
-```html
-<p>Envoyez un événement lors du clic sur
-  <span data-fr-analytics-click="label à remonter">ce texte</span>.
-</p>
-```
-
-```html
-<p>
-Envoyez un événement lors du clic sur
-<a href="http://url-externe" data-fr-analytics-click>ce lien externe</span>.
-</p>
-```
-
-## Actions sur les composants DSFR
+## Actions sur les composants DSFR {#dsfr-actions}
 
 Les composants du DSFR envoient automatiquement des actions prédéfinies, aucune action supplémentaire n’est
 nécessaire pour ces actions.
 
 Ce tableau regroupe les différentes actions remontées à Eulérian pour chaque composant du DSFR :
 
-**Composant**
-
-**Elément**
-
-**Type** [breakpoint]
-
-**Valeur**
-
-**Label**
-
-**Taux**
-**de click**
-
-dsfr\_accordion
-
-fr-collapse
-
-DISCLOSE
-
-Titre de l’accordéon ou intitulé du bouton
-
-✅
-
-fr-accordion\_\_btn
-
-CLICK
-
-Libellé du bouton
-
-dsfr\_alert
-
-fr-alert
-
-IMPRESSION
-
-Titre de l’alerte
-
-dsfr\_badge
-
-fr-badge
-
-IMPRESSION
-
-Libellé du badge
-
-dsfr\_breadcrumb
-
-fr-collapse
-
-IMPRESSION [MD]
-[LG]
-[xl]
-
-fil d’ariane
-
-fr-collapse
-
-DISCLOSE[xs]
-[sm]
-
-fil d’ariane
-
-fr-breadcrumb\_\_button
-
-CLICK
-[xs]
-[sm]
-
-Libellé du bouton
-
-fr-breadcrumb\_\_link
-
-CLICK
-
-href
-
-Libellé du lien
-
-dsfr\_button
-
-fr-btn
-
-CLICK
-
-Libellé du bouton
-
-✅
-
-dsfr\_callout
-
-fr-callout
-
-IMPRESSION
-
-Titre de la mise en avant ou `Mise en avant`
-
-dsfr\_card
-
-fr-card
-
-IMPRESSION
-(sans lien)
-
-Titre de la carte
-
-fr-card\_\_title a
-
-CLICK
-
-href
-
-Lien de la carte
-
-✅
-
-dsfr\_checkbox
-
-fr-checkbox-group \[type="checkbox"\]
-
-CHECK
-
-input\_value
-
-Libellé du champ sélectionné
-
-✅
-
-fr-checkbox-group \[type="checkbox"\]
-
-UNCHECK
-
-input\_value
-
-Libellé du champ désélectionné
-
-✅
-
-dsfr\_connect
-
-fr-connect
-
-CLICK
-
-“FranceConnect”
-
-✅
-
-fr-connect--plus
-
-CLICK
-
-“FranceConnect+”
-
-✅
-
-fr-connect + \* a
-
-CLICK
-
-“Qu'est-ce que FranceConnect ?”
-
-dsfr\_consent
-
-fr-consent-banner
-
-NULL
-
-“Gestionnaire de consentement”
-
-dsfr\_content
-
-fr-content-media
-
-IMPRESSION
-
-`aria-label` du block fr-content-media ou
-`alt` ou `aria-label` de l'image ou
-`title` ou `aria-label` de la video
-
-dsfr\_follow
-
-fr-follow\_\_newsletter fr-input-group fr-input,
-fr-follow\_\_newsletter fr-input-group fr-btn
-
-SUBSCRIBE
-
-“component\_value”: input\_value
-
-“Lettre d'information et Réseaux Sociaux”
-
-✅
-
-dsfr\_footer
-
-fr-footer
-
-IMPRESSION
-
-Pied de page
-
-fr-footer\_\_content-link,
-fr-footer\_\_bottom-link,
-fr-footer\_\_top-link,
-fr-footer\_\_partners-link
-
-CLICK
-
-href
-
-Libellé du lien
-
-dsfr\_header
-
-fr-header
-
-IMPRESSION
-
-En-tête
-
-fr-header\_\_tools-links fr-btns-group fr-btn
-
-CLICK
-[LG]
-[xl]
-
-href
-
-Libellé du bouton d’accès rapide
-
-fr-header\_\_menu-links fr-btns-group fr-btn
-
-CLICK
-[xs]
-[sm]
-[MD]
-
-href
-
-Libellé du bouton d’accès rapide
-
-fr-header\_\_menu fr-modal,
-fr-header\_\_search fr-modal
-
-DISCLOSE
-[xs]
-[sm]
-[MD]
-
-menu
-rechercher
-
-dsfr\_highlight
-
-fr-highlight
-
-IMPRESSION
-
-Mise en exergue
-
-dsfr\_input
-
-fr-input-group
-
-IMPRESSION
-
-input value
-
-Libéllé du label
-
-dsfr\_link
-
-fr-link
-
-CLICK
-
-href
-
-Libellé du lien
-
-✅
-
-fr-link\[href\]
-
-INTERNAL si lien interne, EXTERNAL si lien externe (déterminé par le href)
-
-href
-
-Libellé du lien
-
-✅
-
-fr-link\[download\]
-
-DOWNLOAD
-
-Libellé du lien de téléchargement
-
-✅
-
-dsfr\_modal
-
-fr-modal
-
-DISCLOSE
-
-Titre de la modale
-
-✅
-
-dsfr\_navigation
-
-fr-nav\_\_link
-
-CLICK
-
-href
-
-Libellé du lien
-
-dsfr\_notice
-
-fr-notice
-
-IMPRESSION
-
-Titre du bandeau d’information importante `fr-notice__title`
-
-dsfr\_pagination
-
-fr-pagination\_\_link
-
-CLICK
-
-Libellé du lien de pagination
-
-dsfr\_quote
-
-fr-quote
-
-IMPRESSION
-
-Contenu de la citation (35 premiers caractères)
-
-dsfr\_radio
-
-fr-radio-group \[type="radio"\]
-
-CHECK
-
-legende du fieldset > Libellé du champ selectionné
-
-✅
-
-dsfr\_search
-
-fr-search-bar fr-input
-
-SEARCH
-
-“component\_value”: input\_value
-
-“barre de recherche”
-
-✅
-
-fr-search-bar fr-btn
-
-SEARCH
-
-“component\_value”: input\_value
-
-“barre de recherche”
-
-✅
-
-dsfr\_select
-
-fr-select-group
-
-CHANGE
-
-“component\_value”: select\_value
-
-Libellé du `fr_label`
-
-✅
-
-dsfr\_share
-
-fr-share
-
-IMPRESSION
-
-Libellé du titre `share__title` ou “Boutons de partage”
-
-✅
-
-dsfr\_sidemenu
-
-fr-sidemenu\_\_link
-
-CLICK
-
-href
-
-Arborescence du lien
-
-dsfr\_stepper
-
-fr-stepper
-
-IMPRESSION
-
-“Indicateur d'étapes”
-
-dsfr\_summary
-
-fr-summary\_\_link
-
-CLICK
-
-href
-
-Arborescence du lien
-
-dsfr\_tab
-
-fr-tab
-
-DISCLOSE
-
-Libellé du tab button
-
-✅
-
-\[aria-controls=IdTab\]
-
-CLICK
-
-Libellé du tab button
-
-dsfr\_table
-
-fr-table
-
-IMPRESSION
-
-Caption du tableau
-
-dsfr\_tag
-
-fr-tag
-
-IMPRESSION
-
-Libellé du tag
-
-a.fr-tag, button.fr-tag
-
-CLICK
-
-Libellé du tag cliquable
-
-✅
-
-fr-tag--dismiss
-
-DISMISS
-
-Libellé du tag supprimable
-
-✅
-
-fr-tag\[aria-pressed='false'\]
-
-PRESS
-
-Libellé du tag pressable
-
-✅
-
-fr-tag\[aria-pressed='true'\]
-
-RELEASE
-
-Libellé du tag pressable
-
-✅
-
-dsfr\_tile
-
-fr-tile
-
-IMPRESSION
-
-titre de la tuile
-
-fr-tile fr-tile\_\_link
-
-CLICK
-
-href
-
-titre de la tuile `fr-tile__title`
-
-✅
-
-dsfr\_toggle
-
-fr-toggle \[type="checkbox"\]
-
-CHECK
-
-Libellé du champ sélectionné
-
-✅
-
-fr-toggle \[type="checkbox"\]
-
-UNCHECK
-
-Libellé du champ désélectionné
-
-✅
-
-dsfr\_transcription
-
-fr-transcription fr-collapse
-
-DISCLOSE
-
-Titre de la transcription `'fr-transcription__title`' ou libellé du bouton
-
-✅
-
-fr-transcription\_\_btn
-
-CLICK
-
-Libellé du bouton
-
-dsfr\_upload
-
-fr-upload
-
-IMPRESSION
-
-“component\_value”: input\_value
-
-Libellé du `fr-label` ou "Ajout de fichier"
-
-✅
+|**Composant**|**Elément**|**Type** [BREAKPOINT]|**Valeur**|**Label**|**Taux** **de click**|
+|:----|:----|:----|:----|:----|:----|
+|dsfr_accordion|fr-collapse|DISCLOSE| |Titre de l’accordéon ou intitulé du bouton|✅|
+|fr-accordion__btn|CLICK| |Libellé du bouton| |
+|dsfr_alert|fr-alert|IMPRESSION| |Titre de l’alerte| |
+|dsfr_badge|fr-badge|IMPRESSION| |Libellé du badge| |
+|dsfr_breadcrumb|fr-collapse|IMPRESSION [MD] [LG] [XL]| |fil d’ariane| |
+|fr-collapse|DISCLOSE [XS]  [SM]| |fil d’ariane| |
+|fr-breadcrumb__button|CLICK [XS] [SM]| |Libellé du bouton| |
+|fr-breadcrumb__link|CLICK|href|Libellé du lien| |
+|dsfr_button|fr-btn|CLICK| |Libellé du bouton|✅|
+|dsfr_callout|fr-callout|IMPRESSION| |Titre de la mise en avant ou `Mise en avant`| |
+|dsfr_card|fr-card|IMPRESSION(sans lien)| |Titre de la carte| |
+|fr-card__title a|CLICK|href|Lien de la carte|✅|
+|dsfr_checkbox|fr-checkbox-group [type="checkbox"]|CHECK|input_value|Libellé du champ sélectionné|✅|
+|fr-checkbox-group [type="checkbox"]|UNCHECK|input_value|Libellé du champ désélectionné|✅|
+|dsfr_connect|fr-connect|CLICK| |“FranceConnect”|✅|
+|fr-connect--plus|CLICK| |“FranceConnect+”|✅|
+|fr-connect + * a|CLICK| |“Qu'est-ce que FranceConnect ?”| |
+|dsfr_consent|fr-consent-banner|NULL| |“Gestionnaire de consentement”| |
+|dsfr_content|fr-content-media|IMPRESSION| |`aria-label` du block fr-content-media ou `alt` ou `aria-label` de l'image ou `title` ou `aria-label` de la video| |
+|dsfr_follow|fr-follow__newsletter fr-input-group fr-input,fr-follow__newsletter fr-input-group fr-btn|SUBSCRIBE|“component_value”: input_value|“Lettre d'information et Réseaux Sociaux”|✅|
+|dsfr_footer|fr-footer|IMPRESSION| |Pied de page| |
+|fr-footer__content-link,fr-footer__bottom-link,fr-footer__top-link,fr-footer__partners-link|CLICK|href|Libellé du lien| |
+|dsfr_header|fr-header|IMPRESSION| |En-tête| |
+|fr-header__tools-links fr-btns-group fr-btn|CLICK [LG]</span> [XL]</span>|href|Libellé du bouton d’accès rapide| |
+|fr-header__menu-links fr-btns-group fr-btn|CLICK  [XS]  [SM] [MD]</span>|href|Libellé du bouton d’accès rapide| |
+|fr-header__menu fr-modal,fr-header__search fr-modal|DISCLOSE [XS]  [SM] [MD]</span>| |menurechercher| |
+|dsfr_highlight|fr-highlight|IMPRESSION| |Mise en exergue| |
+|dsfr_input|fr-input-group|IMPRESSION|input value|Libéllé du label| |
+|dsfr_link|fr-link|CLICK|href|Libellé du lien|✅|
+| |fr-link[href]|INTERNAL si lien interne, EXTERNAL si lien externe (déterminé par le href)|href|Libellé du lien|✅|
+| |fr-link[download]|DOWNLOAD| |Libellé du lien de téléchargement|✅|
+|dsfr_modal|fr-modal|DISCLOSE| |Titre de la modale|✅|
+|dsfr_navigation|fr-nav__link|CLICK|href|Libellé du lien| |
+|dsfr_notice|fr-notice|IMPRESSION| |Titre du bandeau d’information importante `fr-notice__title`| |
+|dsfr_pagination|fr-pagination__link|CLICK| |Libellé du lien de pagination| |
+|dsfr_quote|fr-quote|IMPRESSION| |Contenu de la citation (35 premiers caractères)| |
+|dsfr_radio|fr-radio-group [type="radio"]|CHECK| |legende du fieldset > Libellé du champ selectionné|✅|
+|dsfr_search|fr-search-bar fr-input|SEARCH|“component_value”: input_value|“barre de recherche”|✅|
+|fr-search-bar fr-btn|SEARCH|“component_value”: input_value|“barre de recherche”|✅|
+|dsfr_select|fr-select-group|CHANGE|“component_value”: select_value|Libellé du `fr_label`|✅|
+|dsfr_share|fr-share|IMPRESSION| |Libellé du titre `share__title` ou “Boutons de partage”|✅|
+|dsfr_sidemenu|fr-sidemenu__link|CLICK|href|Arborescence du lien| |
+|dsfr_stepper|fr-stepper|IMPRESSION| |“Indicateur d'étapes”| |
+|dsfr_summary|fr-summary__link|CLICK|href|Arborescence du lien| |
+|dsfr_tab|fr-tab|DISCLOSE| |Libellé du tab button|✅|
+|[aria-controls=IdTab]|CLICK| |Libellé du tab button| |
+|dsfr_table|fr-table|IMPRESSION| |Caption du tableau| |
+|dsfr_tag|fr-tag|IMPRESSION| |Libellé du tag| |
+|a.fr-tag, button.fr-tag|CLICK| |Libellé du tag cliquable|✅|
+|fr-tag--dismiss|DISMISS| |Libellé du tag supprimable|✅|
+|fr-tag[aria-pressed='false']|PRESS| |Libellé du tag pressable|✅|
+|fr-tag[aria-pressed='true']|RELEASE| |Libellé du tag pressable|✅|
+|dsfr_tile|fr-tile|IMPRESSION| |titre de la tuile| |
+|fr-tile fr-tile__link|CLICK|href|titre de la tuile `fr-tile__title`|✅|
+|dsfr_toggle|fr-toggle [type="checkbox"]|CHECK| |Libellé du champ sélectionné|✅|
+|fr-toggle [type="checkbox"]|UNCHECK| |Libellé du champ désélectionné|✅|
+|dsfr_transcription|fr-transcription fr-collapse|DISCLOSE| |Titre de la transcription `fr-transcription__title` ou libellé du bouton|✅|
+|fr-transcription__btn|CLICK| |Libellé du bouton| |
+|dsfr_upload|fr-upload|IMPRESSION|“component_value”: input_value|Libellé du `fr-label` ou "Ajout de fichier"|✅|
 
 Il reste possible d’ajouter plus d’actions à remonter, en utilisant les attributs utilitaires
 `data-fr-analytics-{action}` sur un élément HTML d’un composant (voir : [Actions hors composant](#custom-action)).
